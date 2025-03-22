@@ -1,16 +1,84 @@
-# Dot-NET-Microservices-with-Azure-and-AKS
+# eCommerce Microservices Project
 
-**What Will You Learn?**
-**Complete eCommerce Project**: Build a fully functional eCommerce platform featuring users, products, and orders microservices. Learn to implement and integrate these using ASP.NET Core Web API and various technologies.
-**Microservices Architecture**: Develop expertise in microservices with diverse databases like Postgres, MySQL, and MongoDB, along with different architectural patterns.
-**Containerization & Orchestration:** Master Docker and Kubernetes. Learn how to containerize your applications, orchestrate them with AKS (Azure Kubernetes Service), and achieve zero downtime deployments.
-**Fault Tolerance & Caching**: Implement Polly for advanced fault tolerance strategies, use Redis for caching, and leverage RabbitMQ for reliable messaging.
-**DevOps Integration**: Gain hands-on experience with Azure DevOps. Set up CI/CD pipelines, manage environments, and integrate with Azure Key Vault for secure deployment.
-**API Management & Authentication**: Configure an API Gateway using Ocelot, manage your APIs with Azure API Management, and secure your application with Microsoft Entra ID B2C authentication.
+## **Overview**
+This project demonstrates the development of a robust and scalable **eCommerce platform** built using cutting-edge technologies like **ASP.NET Core Web API** with a focus on **microservices architecture**.
 
-**What Will You Build?**
-You’ll develop a complete eCommerce application featuring:
-**Users Microservice**: Manage user data with a clean architecture and tools like AutoMapper and FluentValidation.
-**Products Microservice**: Handle product information with a minimal API and integrate MySQL and EF Core.
-**Orders Microservice**: Process orders using MongoDB and minimal APIs with a focus on fault tolerance and resilience.
-**Frontend Integration**: Connect your microservices with a pre-built Angular frontend, demonstrating end-to-end functionality.
+---
+
+## **What Will You Learn?**
+
+- **Complete eCommerce Project**  
+  Develop a fully functional eCommerce platform featuring **users**, **products**, and **orders microservices**. Learn to implement and integrate these components.
+
+- **Microservices Architecture**  
+  Master microservices design with diverse databases like **Postgres**, **MySQL**, and **MongoDB**, implementing modern architectural patterns.
+
+- **Containerization & Orchestration**  
+  Use **Docker** and **Kubernetes** to containerize applications and orchestrate them with **AKS (Azure Kubernetes Service)** for **zero downtime deployments**.
+
+- **Fault Tolerance & Caching**  
+  Implement advanced fault tolerance strategies using **Polly**, utilize **Redis** for caching, and ensure reliable messaging with **RabbitMQ**.
+
+- **DevOps Integration**  
+  Hands-on experience with **Azure DevOps**, including setting up **CI/CD pipelines**, managing environments, and integrating with **Azure Key Vault**.
+
+- **API Management & Authentication**  
+  Configure an **API Gateway** using **Ocelot**, manage APIs with **Azure API Management**, and secure your application with **Microsoft Entra ID B2C**.
+
+---
+
+## **What Will You Build?**
+
+### **Key Features**
+
+1. **Users Microservice**  
+   Manage user data with a **clean architecture** and tools like **AutoMapper** and **FluentValidation**.
+
+2. **Products Microservice**  
+   Handle product information via **minimal APIs** with integrated **MySQL** and **EF Core**.
+
+3. **Orders Microservice**  
+   Process orders using **MongoDB**, **minimal APIs**, and focus on **fault tolerance** and **resilience**.
+
+4. **Frontend Integration**  
+   Seamlessly connect your microservices with a pre-built **Angular frontend** for a complete end-to-end solution.
+
+---
+
+## **Project Highlights**
+
+- **Technology Stack:**  
+  - Backend: ASP.NET Core Web API  
+  - Databases: Postgres, MySQL, MongoDB  
+  - Caching & Messaging: Redis, RabbitMQ  
+  - Orchestration: AKS, Docker, Kubernetes  
+
+- **Development Tools:**  
+  - Azure DevOps for CI/CD  
+  - Polly for resilience  
+  - Ocelot for API Gateway  
+  - Azure API Management for secure APIs  
+
+---
+
+## **Getting Started**
+
+### **Requirements**
+- Docker installed
+- Kubernetes cluster setup with AKS
+- Azure DevOps account
+
+### **Steps to Run**
+1. Clone the repository.
+2. Set up the required databases: Postgres, MySQL, and MongoDB.
+3. Configure the API Gateway using Ocelot.
+4. Build and run the microservices using Docker and deploy them on AKS.
+5. Link the Angular frontend with the APIs.
+
+---
+
+## **Contributing**
+Contributions are welcome! Please fork this repository and submit pull requests.
+
+## **Learning Source** 
+This project is a part of the Udemy course by **Harsha Vardhan**, providing in-depth guidance and practical knowledge.
