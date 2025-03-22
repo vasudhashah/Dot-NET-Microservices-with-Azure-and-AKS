@@ -1,3 +1,6 @@
+using eCommerce.Core;
+using eCommerce.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 //Add Infrastructure Services
