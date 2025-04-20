@@ -20,6 +20,13 @@ namespace BusinessLogicLayer.ServiceContracts
         Task<List<ProductResponse?>> GetProductsByCondition(Expression<Func<Product, bool>> conditionExpression);
 
         /// <summary>
+        /// Returns a single product that matches with given condition
+        /// </summary>
+        /// <param name="conditionExpression">Express that represents the condition to check</param>
+        /// <returns>Returns matching product or null</returns>
+        Task<ProductResponse?> GetProductByCondition(Expression<Func<Product, bool>> conditionExpression);
+
+        /// <summary>
         /// Adds (inserts) product into the table using products repository
         /// </summary>
         /// <param name="productAddRequest">Product to insert</param>

@@ -67,6 +67,18 @@ namespace BusinessLogicLayer.Services
             return await _productsRepository.DeleteProduct(productID);            
         }
 
+        public async Task<ProductResponse?> GetProductByCondition(Expression<Func<Product, bool>> conditionExpression)
+        {
+            Product? product = await _productsRepository.GetProductByCondition(conditionExpression);
+            if (product == null)
+            {
+                return null;
+            }
+
+            ProductResponse productResponse = _mapper.Map<ProductResponse>(product); //Invokes ProductToProductResponseMappingProfile
+            return productResponse;
+        }
+
         public async Task<List<ProductResponse?>> GetProducts()
         {
             IEnumerable<Product?> products = await _productsRepository.GetProducts();
