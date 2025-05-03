@@ -16,7 +16,11 @@ namespace DataAccessLayer.RepositoryContracts
         public async Task<Order?> AddOrder(Order order)
         {
             order.OrderID = Guid.NewGuid();
-
+            order._id = order.OrderID;
+            foreach (OrderItem item in order.OrderItems) 
+            {
+                item._id = Guid.NewGuid();
+            }
             await _orders.InsertOneAsync(order);
             return order;
         }
@@ -64,6 +68,8 @@ namespace DataAccessLayer.RepositoryContracts
             {
                 return null;
             }
+
+            order._id = existingOrder._id;
 
             ReplaceOneResult replaceOneResult = await _orders.ReplaceOneAsync(filter, order);
 
