@@ -21,5 +21,14 @@ namespace eCommerce.Core.RepositoryContracts
         /// <param name="password"></param>
         /// <returns></returns>
         Task<ApplicationUser?> GetUserByEmailAndPassword(string? email, string? password);
+
+        /// <summary>
+        /// Returns the users data based on the given user Id
+        /// </summary>
+        /// <param name="userId">User Id to search</param>
+        /// <returns>ApplicationUser object that matches the given UserId</returns>
+        Task<ApplicationUser?> GetUserByUserId(Guid? userId);
+
+
     }
 }

@@ -58,5 +58,18 @@ namespace eCommerce.Core.Services
                 Token = "token"
             };
         }
+
+        public async Task<UserDTO> GetUserByUserId(Guid? userId)
+        {
+            //Get the user by UserId
+            ApplicationUser? user = await _usersRepository.GetUserByUserId(userId);
+            if (user == null)
+            {
+                return null;
+            }
+            //Map the ApplicationUser to UserDTO
+            UserDTO userDTO = _mapper.Map<UserDTO>(user);
+            return userDTO;
+        }
     }
 }
