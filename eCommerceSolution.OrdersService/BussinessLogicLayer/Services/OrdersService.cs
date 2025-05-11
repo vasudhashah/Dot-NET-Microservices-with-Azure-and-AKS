@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BussinessLogicLayer.DTO;
+using BussinessLogicLayer.HttpClients;
 using BussinessLogicLayer.ServiceContracts;
 using DataAccessLayer.Entities;
 using DataAccessLayer.RepositoryContracts;
@@ -17,8 +18,9 @@ namespace BussinessLogicLayer.Services
         private readonly IValidator<OrderItemUpdateRequest> _orderItemUpdateRequestValidator;
         private readonly IMapper _mapper;
         private IOrdersRepository _ordersRepository;
+        private UsersMicroserviceClient _usersMicroserviceClient;
 
-        public OrdersService(IOrdersRepository ordersRepository, IMapper mapper, IValidator<OrderAddRequest> orderAddRequestValidator, IValidator<OrderItemAddRequest> orderItemAddRequestValidator, IValidator<OrderUpdateRequest> orderUpdateRequestValidator, IValidator<OrderItemUpdateRequest> orderItemUpdateRequestValidator)
+        public OrdersService(IOrdersRepository ordersRepository, IMapper mapper, IValidator<OrderAddRequest> orderAddRequestValidator, IValidator<OrderItemAddRequest> orderItemAddRequestValidator, IValidator<OrderUpdateRequest> orderUpdateRequestValidator, IValidator<OrderItemUpdateRequest> orderItemUpdateRequestValidator, UsersMicroserviceClient usersMicroserviceClient)
         {
             _orderAddRequestValidator = orderAddRequestValidator;
             _orderItemAddRequestValidator = orderItemAddRequestValidator;
@@ -26,6 +28,7 @@ namespace BussinessLogicLayer.Services
             _orderItemUpdateRequestValidator = orderItemUpdateRequestValidator;
             _mapper = mapper;
             _ordersRepository = ordersRepository;
+            _usersMicroserviceClient = usersMicroserviceClient;
         }
 
         public async Task<OrderResponse?> AddOrder(OrderAddRequest orderAddRequest)
@@ -56,6 +59,13 @@ namespace BussinessLogicLayer.Services
                 }
             }
 
+            //Check if userID exists in the Users microservice
+            UserDTO? user = await _usersMicroserviceClient.GetUserById(orderAddRequest.UserID);
+            if (user == null)
+            {
+                throw new ArgumentException($"User with ID {orderAddRequest.UserID} does not exist.");
+            }
+
             //Convert data from OrderAddRequest to Order
             Order orderInput = _mapper.Map<Order>(orderAddRequest); //Map OrderAddRequest to 'Order' type (it invokes OrderAddRequestToOrderMappingProfile class)
 
@@ -65,7 +75,7 @@ namespace BussinessLogicLayer.Services
                 orderItem.TotalPrice = orderItem.Quantity * orderItem.UnitPrice;
             }
             orderInput.TotalBill = orderInput.OrderItems.Sum(temp => temp.TotalPrice);
-            
+
             //Invoke repository
             Order? addedOrder = await _ordersRepository.AddOrder(orderInput);
 
@@ -149,6 +159,13 @@ namespace BussinessLogicLayer.Services
                     string errors = string.Join(", ", orderItemUpdateRequestValidationResult.Errors.Select(temp => temp.ErrorMessage));
                     throw new ArgumentException(errors);
                 }
+            }
+
+            //Check if userID exists in the Users microservice
+            UserDTO? user = await _usersMicroserviceClient.GetUserById(orderUpdateRequest.UserID);
+            if (user == null)
+            {
+                throw new ArgumentException($"User with ID {orderUpdateRequest.UserID} does not exist.");
             }
 
             Order orderInput = _mapper.Map<Order>(orderUpdateRequest); //Map OrderUpdateRequest to 'Order' type (it invokes OrderUpdateRequestToOrderMappingProfile class)
