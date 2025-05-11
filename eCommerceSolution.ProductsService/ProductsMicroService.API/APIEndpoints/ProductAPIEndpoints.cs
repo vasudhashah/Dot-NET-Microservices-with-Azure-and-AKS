@@ -21,6 +21,10 @@ namespace ProductsMicroService.API.APIEndpoints
             app.MapGet("/api/products/search/product-id/{ProductID:guid}", async (IProductsService productsService, Guid ProductID) =>
             {
                 ProductResponse? product = await productsService.GetProductByCondition(temp => temp.ProductID == ProductID);
+                if(product == null)
+                {
+                    return Results.NotFound($"Product with ID {ProductID} not found");
+                }
                 return Results.Ok(product);
             });
 
