@@ -1,16 +1,15 @@
 services:
   ordersmicroservice.api:
-    image: ${DOCKER_REGISTRY-}ordersmicroserviceapi
+    image: ordersmicroserviceapi
     build:
       context: .
       dockerfile: OrdersMicroservice.API/Dockerfile
-    environment: 
-     - ASPNETCORE_ENVIRONMENT=Development
+    environment:
      - MONGODB_HOST=mongodb-container
      - MONGODB_PORT=27017
      - MONGODB_DATABASE=OrdersDatabase
-     - UsersMicroserviceName=localhost
-     - UsersMicroservicePort=5050
+     - UsersMicroserviceName=users-microservice
+     - UsersMicroservicePort=9090
     ports:
      - "7000:8080"
     networks:
@@ -50,14 +49,14 @@ services:
     image: users-microservice:latest
     environment:
     - ASPNETCORE_HTTP_PORTS=8080
-    - ASPNETCORE_HTTP_ENVIRONMENT=Development
-    - POSTGRES_HOST=localhost
+    - ASPNETCORE_ENVIRONMENT=Development
+    - POSTGRES_HOST=postgres-container
     - POSTGRES_PORT=5432
     - POSTGRES_DATABASE=eCommerceUsers
     - POSTGRES_USER=postgres
     - POSTGRES_PASSWORD=admin
     ports:
-    - "5000:8080"
+    - "5000:9090"
     networks:
     - users-postgres-network
     - ecommerce-network
